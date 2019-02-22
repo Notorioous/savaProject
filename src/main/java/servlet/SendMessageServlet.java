@@ -40,7 +40,7 @@ public class SendMessageServlet extends HttpServlet {
 
 //        resp.sendRedirect("/user/getFriend");
 
-        req.getRequestDispatcher("/user/getFriend").forward(req,resp);
+        resp.sendRedirect("/user/toHome");
 
 
     }
