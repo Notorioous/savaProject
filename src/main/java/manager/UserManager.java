@@ -88,14 +88,14 @@ public class UserManager {
     }
 
 
-    public void sendRequest(int from_id, int to_id) {
+    public void sendRequest(int fromId, int toId) {
 
         String query = "INSERT INTO friend_request (from_id, to_id)" +
                 "VALUES (?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, from_id);
-            preparedStatement.setInt(2, to_id);
+            preparedStatement.setInt(1, fromId);
+            preparedStatement.setInt(2, toId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,9 +103,9 @@ public class UserManager {
 
     }
 
-    public Set<User> getFriendRequestUser(int to_id) {
+    public Set<User> getFriendRequestUser(int toId) {
 
-        String query = "SELECT from_id FROM friend_request WHERE to_id = " + to_id;
+        String query = "SELECT from_id FROM friend_request WHERE to_id = " + toId;
 
         Set<User> requestUsers = new HashSet<User>();
 
@@ -144,15 +144,15 @@ public class UserManager {
         return null;
     }
 
-    public void addToFriendList(int user_id, int friend_id) {
+    public void addToFriendList(int userId, int friendId) {
 
         String query = "INSERT INTO user_friend (user_id, friend_id)" +
                 "VALUES (?,?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, user_id);
-            preparedStatement.setInt(2, friend_id);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, friendId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -160,9 +160,9 @@ public class UserManager {
 
     }
 
-    public void removeRequest(int from_id, int to_id) {
+    public void removeRequest(int fromId, int toId) {
 
-        String query = "DELETE FROM friend_request WHERE from_id =" + from_id + " AND to_id =" + to_id;
+        String query = "DELETE FROM friend_request WHERE from_id =" + fromId + " AND to_id =" + toId;
 
         try {
             Statement statement = connection.createStatement();
@@ -173,8 +173,8 @@ public class UserManager {
 
     }
 
-    public Set<User> getAllFriends(int user_id){
-        String query = "SELECT friend_id FROM user_friend WHERE user_id = " + user_id;
+    public Set<User> getAllFriends(int userId){
+        String query = "SELECT friend_id FROM user_friend WHERE user_id = " + userId;
 
         Set<User> users = new HashSet<User>();
 
@@ -184,8 +184,8 @@ public class UserManager {
             while (resultSet.next()){
                 users.add(getUserById(resultSet.getInt(1)));
             }
-            if(getUserId(user_id) != null){
-                users.addAll(getUserId(user_id));
+            if(getUserId(userId) != null){
+                users.addAll(getUserId(userId));
             }
             return users;
         } catch (SQLException e) {
@@ -194,19 +194,6 @@ public class UserManager {
         return null;
     }
 
-
-    public void deleteFriend(int user_id, int friend_id){
-
-        String query = "DELETE FROM user_friend WHERE user_id= " + user_id + " AND friend_id = " + friend_id;
-
-        try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public Set<User> getUserId(int id){
 
@@ -224,6 +211,21 @@ public class UserManager {
         }
         return null;
     }
+
+    public void deleteFriend(int userId, int friendId){
+
+        String query = "DELETE FROM user_friend WHERE user_id= " + userId + " AND friend_id = " + friendId;
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 
 }

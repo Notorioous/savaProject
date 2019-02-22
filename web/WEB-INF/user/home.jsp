@@ -19,7 +19,7 @@
 
 <h3>Hello my friend ${user.name}
 </h3>
-<h4><a href="/logout"><b>LOGOUT</b></a></h4>
+<h4><a href="/user/logout"><b>LOGOUT</b></a></h4>
 
 <div style="width: 250px">
     <img src="/getImage?picName=${user.picUrl}" width="200">
@@ -28,9 +28,10 @@
 
 <div style="border: black 1px dashed; width: 150px">
     ${user.name} ${user.surname}
+</div><br>
 
 
-</div>
+
 <div>
     <h3>All USERS: </h3>
     <c:forEach var="users" items="${requestScope.get('users')}">
@@ -40,6 +41,7 @@
         <tr>
             <td>Name</td>
             <td>Surname</td>
+            <td>Photo</td>
             <td>Request</td>
         </tr>
 
@@ -67,7 +69,7 @@
         <tr>
             <td>Name</td>
             <td>Surname</td>
-            <td>Picture</td>
+            <td>Photo</td>
             <td>Request</td>
         </tr>
 
@@ -96,7 +98,8 @@
         <tr>
             <td>Name</td>
             <td>Surname</td>
-            <td>Picture</td>
+            <td>Photo</td>
+            <td>Message</td>
             <td>Request</td>
         </tr>
 
@@ -105,7 +108,8 @@
             <td>${friends.name}</td>
             <td>${friends.surname}</td>
             <td><img src="/getImage?picName=${friends.picUrl}" width="70 px"></td>
-            <td><a href="/user/deleteFriend?from_id=${friends.id}">DELETE FROM FRIENDS</a></td>
+            <td><a href="/user/getFriend?to_id=${friends.id}"><b>Messages</b></a></td>
+            <td style="width: 50px"><a href="/user/deleteFriend?from_id=${friends.id}"> <p style="border: red 1px solid">DELETE</p>  </a></td>
 
         </tr>
     </table>

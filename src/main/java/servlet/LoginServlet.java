@@ -27,7 +27,6 @@ public class LoginServlet extends HttpServlet {
 
 
         User user = userManager.getUserByEmailAndPassword(email,password);
-//        List<User> users = userManager.getAllUsers();
 
         HttpSession session = req.getSession();
         session.setAttribute("user",user);
